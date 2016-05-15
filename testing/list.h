@@ -9,8 +9,10 @@
 #ifndef list_h
 #define list_h
 
+//#include <stdio.h>
+#include <string.h>
 #include <stdlib.h>
-
+#include <stdio.h>
 
 typedef void (*FunctionType)(int);
 

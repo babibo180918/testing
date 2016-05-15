@@ -24,6 +24,7 @@
 //
 #include "dijkstra.h"
 #include "list.h"
+#include "sort.h"
 //
 //#if defined _WIN32
 //#define DIR_DELIMIT_CHAR				'\\'
@@ -190,5 +191,15 @@ int main(int argc, const char * argv[]) {
     //
     L2_LIST_TRAVERSE(myList, &tranverse);
     L2_LIST_DESTROY(myList, &delete_item);
+//
+    int tmp[] = {10,3,1,4,5, 20,3,23,12,4,45,23,43,2,6,12};
+    int compare(void*, void*);
+    bbsort(tmp, 16, 4, &compare);
+    for(int i=0; i<16; i++)
+	printf("value: %d\n", tmp[i]);
     return 0;
+}
+
+int compare(void *p1, void *p2){
+    return (*(int*)p1 - *(int*)p2);
 }
