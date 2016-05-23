@@ -25,6 +25,7 @@
 #include "dijkstra.h"
 #include "list.h"
 #include "sort.h"
+#include "bst.h"
 //
 //#if defined _WIN32
 //#define DIR_DELIMIT_CHAR				'\\'
@@ -142,6 +143,11 @@ void delete_item(void *data){
     free(data);
 }
 
+void traverse2(void *data, size_p size){
+    printf("traverse at %d\n", *(int *)data);
+}
+
+
 
 int main(int argc, const char * argv[]) {
 //    int grapth[10][10] = {
@@ -177,27 +183,26 @@ int main(int argc, const char * argv[]) {
 //    delete d;
 //    return 0;
     
-    //Triangular(45);
     
-    L2_List_p myList = L2_LIST_INIT((char *)"Test list");
-    
-    for(int i=0; i<10; i++){
-        int *value = new int;
-        *value = i;
-        //L2_ADD_TO_HEAD(myList, value);
-        L2_ADD_TO_LAST(myList, value);
-        //L2_ADD_TO_BEFORE_OF(myList, myList->anchor, value);
-    }
-    //
-    L2_LIST_TRAVERSE(myList, &tranverse);
-    L2_LIST_DESTROY(myList, &delete_item);
+//    L2_List_p myList = L2_LIST_INIT((char *)"Test list");
+//    
+//    for(int i=0; i<10; i++){
+//        int *value = new int;
+//        *value = i;
+//        //L2_ADD_TO_HEAD(myList, value);
+//        L2_ADD_TO_LAST(myList, value);
+//        //L2_ADD_TO_BEFORE_OF(myList, myList->anchor, value);
+//    }
+//    //
+//    L2_LIST_TRAVERSE(myList, &tranverse);
+//    L2_LIST_DESTROY(myList, &delete_item);
 //
     int tmp[] = {10,3,1,4,5, 20,3,23,12,4,45,23,43,2,6,12};
     int compare(void*, void*);
-    bbsort(tmp, 16, 4, &compare);
-    for(int i=0; i<16; i++)
-	printf("value: %d\n", tmp[i]);
-    return 0;
+    printf("size of tmp: %d\n", (int)sizeof(tmp));
+    BST_p tree = BST_build_from_array("tree", tmp, 16, 4);
+    BST_traverse(tree->root, &traverse2, 4);
+    BST_destroy(tree, &delete_item, 4);
 }
 
 int compare(void *p1, void *p2){
